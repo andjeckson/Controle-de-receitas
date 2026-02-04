@@ -1,0 +1,30 @@
+{
+  "pacientes" : [
+      {
+        "nome": "Geraldo Joel Tavares Pereira",
+        "data": "14/10/2025",
+        "receita": [
+            {
+                "medicamento": "Losartana 50 mg",
+                "quantidade": "",
+                "tipo": "contínuo"
+            }
+        ]
+      },
+      {
+        "nome": "Valmir de Castro dos Santos",
+        "data": "02/02/2026",
+        "receita": [
+            {
+                "medicamento": "Clonazepam 2,5 mg/ml",
+                "quantidade": "01",
+                "tipo": "frasco"
+            },{
+                "medicamento": "Quetiapina 25 mg",
+                "quantidade": "01",
+                "tipo": "caixa"
+            }
+        ]
+      }
+  ]
+}

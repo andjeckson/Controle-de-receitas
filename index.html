@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Controle de receitas</title>
+   <link rel="stylesheet" href="assets/boxicons/css/boxicons.min.css">
+   <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  
+<div class="app">
+  <!-- Cabeçalho -->
+ 
+ <nav class="navegacao">
+  <header class="cabecalho">
+      <p>Controle de receitas</p>
+  </header>
+    <div class="pesquisar">
+       <label class="barra-de-pesquisa"
+              id="barra-de-pesquisa">
+           <i class="bx bx-search"></i>
+            <input type="search"
+                    id="pesquisar"
+                    placeholder="Pesquisar paciente…">
+           <i class="bx bx-x" id="x"></i>
+        </label>
+    </div>
+ </nav>
+ 
+<section class="receitas-renovadas">
+     <div class="card">
+          <header>
+                  <span class="letra">
+                       <i class="bx bx-user"></i>
+                  </span>
+                  <h3>Fulano</h3>
+              </header>
+          <div class="medicamentos">
+              <p>Medicamentos:</p>
+              <ul>
+                 <li>
+                  <span class="nome"><i class="bx bxs-capsule"></i>Losartana</span>
+                  <span class="quantidade"><i class="bx bx-package"></i>  contínuo</span>
+                </li>
+              </ul>
+              </div>
+                <div class="acoes">
+                  <div class="data">
+                    <span><i class="bx bx-calendar"></i>Data:</span>
+                    <span id="data">03/04/2025</span>
+                  </div>
+                  <div>
+                       <i class="bx bx-pencil"></i>
+                    <i class="bx bx-trash"></i>
+                  </div>
+                </div>
+     </div>
+</section>
+
+<dialog >
+   <div class="modal" open>
+      <header class="cabecalho">
+          <h2>Nova receita:</h2>
+          <p>Preencha os dados corretamente para adicionar uma nova receita.</p>
+      </header>
+      
+        <div class="caixa-de-texto">
+             <h3>Nome do paciente:</h3>
+             <input type="text" name="" id="" placeholder="Ex: Ana Bolizante">
+        </div>
+        
+        <div class="medicamentos">
+           <header>
+            <h3>Medicamentos:</h3>
+            <button>
+                <i class="bx bx-plus"></i>
+                <span>Adicionar</span>
+            </button>
+          </header>
+          
+        </div>
+   </div>
+</dialog>
+  
+  <button class="botao-flutuante">
+      <i class="bx bx-plus"></i>
+  </button>
+  
+</div>
+
+  
+  <script type="text/javascript" src="assets/js/main.js"></script>
+</body>
+</html>
