@@ -543,13 +543,13 @@ input:focus, select:focus {
 
 
 @media screen and (min-width: 800px){
-  body{
-    margin: 0 60px;
+  :root{
+    --margem: 60px;
   }
 }
 
 @media screen and (min-width: 1024px){
-  body{
-    margin: 0 60px;
+  :root{
+    --margem: 80px;
   }
 } 
