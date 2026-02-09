@@ -1,0 +1,129 @@
+:host {
+  --bg-main: #ffffff;
+  --border-color: #aaaaaa;
+  --accent-color: #007bff; /* Cor para o checkmark e hover */
+  --shadow-btn: 0 5px 10px rgba(0, 0, 0, 0.15);
+  --shadow-list: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --radius: 0.8rem;
+  
+  display: inline-block;
+  font-family: 'HarmonyOS', 'Segoe UI', sans-serif;
+  user-select: none;
+  position: relative;
+  width: 150px; /* Largura padrão, pode ser sobrescrita */
+}
+
+/* Simplificando seletores: No Shadow DOM, não precisamos de :host em tudo */
+button {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  background: var(--bg-main);
+  box-shadow: var(--shadow-btn);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s;
+}
+
+button:hover {
+  border-color: #888;
+}
+
+ul {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 8px 0 0 0;
+  padding: 5px 0;
+  background: var(--bg-main);
+  box-shadow: var(--shadow-list);
+  list-style: none;
+  border-radius: var(--radius);
+  
+  position: absolute;
+  top: 100%;
+  z-index: 10;
+  
+  /* Animação aprimorada */
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 
+    opacity 0.2s ease-out, 
+    transform 0.2s ease-out, 
+    visibility 0.2s;
+  
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+ul.abrir {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+li {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+li:hover {
+  background: #f5f5f5;
+}
+
+li:active {
+  background: #eeeeee;
+}
+
+/* Estilização do Checkmark */
+li::after {
+  font-family: 'boxicons' !important;
+  content: '\ea41'; /* Ícone de check */
+  margin-right: 8px;
+  width: 1.2rem;
+  font-size: 1.1rem;
+  color: var(--accent-color);
+  
+  /* Esconde o ícone por padrão usando opacidade para manter o espaço */
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+li.selecionado {
+  font-weight: bold;
+  background: #f0f7ff;
+}
+
+li.selecionado::after {
+  opacity: 1;
+}
+
+
+/* Realce para campos inválidos */
+.modal-content input:invalid, 
+.modal-content input.erro-validacao {
+    border-color: var(--cor-perigo) !important;
+    background-color: #fff8f8;
+}
+
+/* Estilo para quando a lista está vazia (opcional) */
+#container-meds-edit:empty::before {
+    content: "Nenhum medicamento adicionado.";
+    display: block;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #999;
+    border: 1px dashed #ccc;
+    border-radius: 10px;
+}
+
+/* Melhoria no scroll do modal para telas pequenas */
+.modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+}

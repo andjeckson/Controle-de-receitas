@@ -6,6 +6,9 @@
   <title>Controle de receitas</title>
    <link rel="stylesheet" href="assets/boxicons/css/boxicons.min.css">
    <link rel="stylesheet" href="assets/css/style.css">
+   
+   <script src="/assets/scrollreveal/js/scrollreveal.js" defer></script>
+   <script type="text/javascript" src="assets/js/main.js" defer></script>
 </head>
 
 <body>
@@ -16,6 +19,10 @@
  <nav class="navegacao">
   <header class="cabecalho">
       <p>Controle de receitas</p>
+  <button class="botao-flutuante btn-topo-novo" onclick="abrirModalNovo()">
+      <i class="bx bx-plus"></i>
+      Nova receita 
+  </button>
   </header>
     <div class="pesquisar">
        <label class="barra-de-pesquisa"
@@ -29,68 +36,139 @@
     </div>
  </nav>
  
-<section class="receitas-renovadas">
-     <div class="card">
-          <header>
-                  <span class="letra">
-                       <i class="bx bx-user"></i>
-                  </span>
-                  <h3>Fulano</h3>
-              </header>
-          <div class="medicamentos">
-              <p>Medicamentos:</p>
-              <ul>
-                 <li>
-                  <span class="nome"><i class="bx bxs-capsule"></i>Losartana</span>
-                  <span class="quantidade"><i class="bx bx-package"></i>  contínuo</span>
-                </li>
-              </ul>
-              </div>
-                <div class="acoes">
-                  <div class="data">
-                    <span><i class="bx bx-calendar"></i>Data:</span>
-                    <span id="data">03/04/2025</span>
-                  </div>
-                  <div>
-                       <i class="bx bx-pencil"></i>
-                    <i class="bx bx-trash"></i>
-                  </div>
-                </div>
-     </div>
+ <section class="receitas-grid" id="container-receitas">
+ <!--
+  <article class="receita-card">
+    <header class="receita-header">
+      <div class="avatar-paciente" aria-hidden="true">
+        <i class="bx bx-user"></i>
+      </div>
+      <h3 class="nome-paciente">Fulano de Tal</h3>
+    </header>
+
+    <div class="receita-corpo">
+      <h4 class="titulo-sessao">Medicamentos</h4>
+      <ul class="lista-medicamentos">
+        <li class="item-medicamento">
+          <span class="medicamento-nome">
+            <i class="bx bxs-capsule"></i> Losartana
+          </span>
+          <span class="medicamento-status">
+            <i class="bx bx-package"></i> Contínuo
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <footer class="receita-footer">
+      <div class="data-info">
+        <i class="bx bx-calendar"></i>
+        <div class="data-texto">
+          <span>Renovada em:</span>
+          <strong>03/01/2026</strong>
+        </div>
+      </div>
+      
+      <div class="acoes-botoes">
+        <button class="btn-acao btn-editar" title="Editar">
+          <i class="bx bx-pencil"></i>
+        </button>
+        <button class="btn-acao btn-excluir" title="Excluir">
+          <i class="bx bx-trash"></i>
+        </button>
+      </div>
+    </footer>
+  </article>-->
 </section>
 
-<dialog >
-   <div class="modal" open>
-      <header class="cabecalho">
-          <h2>Nova receita:</h2>
-          <p>Preencha os dados corretamente para adicionar uma nova receita.</p>
-      </header>
-      
-        <div class="caixa-de-texto">
-             <h3>Nome do paciente:</h3>
-             <input type="text" name="" id="" placeholder="Ex: Ana Bolizante">
-        </div>
+<div id="modal-novo" class="modal">
+    <div class="modal-content">
+        <header class="modal-header">
+            <h3>Nova Receita</h3>
+            <button type="button" class="btn-close" onclick="fecharModalNovo()">&times;</button>
+        </header>
         
-        <div class="medicamentos">
-           <header>
-            <h3>Medicamentos:</h3>
-            <button>
-                <i class="bx bx-plus"></i>
-                <span>Adicionar</span>
-            </button>
-          </header>
-          
-        </div>
-   </div>
-</dialog>
-  
-  <button class="botao-flutuante">
-      <i class="bx bx-plus"></i>
-  </button>
+        <p class="modal-subtitle">Preencha os dados da renovação da receita.</p>
+        
+        <form id="form-novo">
+            <div class="input-group">
+                <label>Nome do Paciente</label>
+                <input type="text" id="novo-nome" placeholder="Digite o nome completo" required>
+            </div>
+
+            <div class="meds-section-header">
+                <label>Medicamentos</label>
+                <button type="button" class="btn-add-med" onclick="adicionarLinhaNovo()">
+                    <i class='bx bx-plus'></i> Adicionar
+                </button>
+            </div>
+
+            <div id="container-meds-novo">
+                </div>
+
+            <div class="input-group">
+                <label>Data da Renovação</label>
+                <div class="input-with-icon">
+                    <i class='bx bx-calendar'></i>
+                    <input type="date" id="novo-data" required>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" onclick="fecharModalNovo()">Cancelar</button>
+                <button type="submit" class="btn-update">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div id="modal-edicao" class="modal">
+    <div class="modal-content">
+        <header class="modal-header">
+            <h3>Editar Receita</h3>
+            <button type="button" class="btn-close" onclick="fecharModal()">&times;</button>
+        </header>
+        
+        <p class="modal-subtitle">Atualize os dados da renovação da receita.</p>
+        
+        <form id="form-edicao">
+            <input type="hidden" id="edit-id">
+            
+            <div class="input-group">
+                <label>Nome do Paciente</label>
+                <input type="text" id="edit-nome" required>
+            </div>
+
+            <div class="meds-section-header">
+                <label>Medicamentos</label>
+                <button type="button" class="btn-add-med" onclick="adicionarLinhaMedicamento()">
+                    <i class='bx bx-plus'></i> Adicionar
+                </button>
+            </div>
+
+            <div id="container-meds-edit">
+                </div>
+
+            <div class="input-group">
+                <label>Data da Renovação</label>
+                <div class="input-with-icon">
+                    <i class='bx bx-calendar'></i>
+                    <input type="date" id="edit-data" required>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" onclick="fecharModal()">Cancelar</button>
+                <button type="submit" class="btn-update">Atualizar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
   
 </div>
 
-  
-  <script type="text/javascript" src="assets/js/main.js"></script>
 </body>
 </html>
