@@ -25,15 +25,16 @@
   </button>
   </header>
     <div class="pesquisar">
-       <label class="barra-de-pesquisa"
-              id="barra-de-pesquisa">
-           <i class="bx bx-search"></i>
-            <input type="search"
-                    id="pesquisar"
-                    placeholder="Pesquisar paciente…">
-           <i class="bx bx-x" id="x"></i>
-        </label>
-    </div>
+    <label class="barra-de-pesquisa" for="pesquisar">
+        <i class="bx bx-search" aria-hidden="true"></i>
+        <input type="search"
+                id="pesquisar"
+                name="q"
+                placeholder="Pesquisar paciente…">
+        <i class="bx bx-x" id="botao-limpar-pesquisa" aria-label="Limpar pesquisa" role="button"></i>
+    </label>
+</div>
+
  </nav>
  
  <section class="receitas-grid" id="container-receitas">

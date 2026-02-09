@@ -1,6 +1,5 @@
 
 
-
 const WORKER_URL = "https://controledereceitas.andjeckson.workers.dev/";
 const $ = document.querySelector.bind(document);
 
@@ -9,6 +8,33 @@ HTMLElement.prototype.on = function(evento, callback) {
     this.addEventListener(evento, callback);
     return this;
 };
+
+let barraDePesquisa     = $('#pesquisar')
+let botaoApagarPesquisa = $('#botao-limpar-pesquisa')
+
+botaoApagarPesquisa.onclick = ()=> {
+    barraDePesquisa.value = ''
+    pesquisarPaciente()
+}
+
+barraDePesquisa.oninput = ()=> pesquisarPaciente()
+
+
+function pesquisarPaciente(){
+    let valor = barraDePesquisa.value
+    let cards = $('.receitas-grid').querySelectorAll('.receita-card')
+    
+        cards.forEach((card, i)=>{
+            let nomeDoPaciente = card.querySelector('.nome-paciente').textContent
+            
+            if( String(nomeDoPaciente).startsWith(valor)){
+                 card.style.display = ''
+            }else{
+                 card.style.display = 'none'
+            }
+        })
+}
+
 
 // Estado global da aplicação
 let receitasAtuais = [];

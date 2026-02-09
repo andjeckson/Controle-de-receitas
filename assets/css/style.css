@@ -71,9 +71,6 @@ nav.navegacao header.cabecalho{
 nav.navegacao .barra-de-pesquisa{
   transition: .1s linear;
 }
-nav.navegacao .barra-de-pesquisa:hover{
-  margin-top: -50px;
-}
 
 
 nav.navegacao .pesquisar{
@@ -523,3 +520,16 @@ input:focus, select:focus {
     background: #94a3b8;
     cursor: not-allowed;
 }
+
+
+@media screen and (min-width: 800px){
+  body{
+    margin: 0 60px;
+  }
+}
+
+@media screen and (min-width: 1024px){
+  body{
+    margin: 0 60px;
+  }
+} 
