@@ -81,7 +81,7 @@ function renderizarCards(lista) {
         const medsHTML = item.medicamentos.map(m => `
             <li class="item-medicamento">
                 <span class="medicamento-nome"><i class='bx bxs-capsule'></i> ${m.nome}</span>
-                <span class="medicamento-status">${m.quantidade} ${m.unidade}</span>
+                <span class="medicamento-status"><i class="bx bx-package"></i>${m.quantidade} ${m.unidade}</span>
             </li>
         `).join('');
 
@@ -120,7 +120,7 @@ function renderizarCards(lista) {
  * 3. LÓGICA DO MODAL (DINÂMICA)
  * Gera o template idêntico à imagem (Nome, Qtd, Unidade)
  */
-function gerarTemplateLinha(nome = '', qtd = '', unidade = 'Caixa(s)') {
+function gerarTemplateLinha(nome = '', qtd = '', unidade = 'Comprimidos') {
     return `
         <div class="med-card-edit">
             <div class="med-card-row-1">
@@ -131,17 +131,31 @@ function gerarTemplateLinha(nome = '', qtd = '', unidade = 'Caixa(s)') {
             </div>
             <div class="med-card-row-2">
                 <input type="number" value="${qtd}" class="input-med-qtd" placeholder="Quantidade">
-                <select class="input-med-unidade">
+                <select class="input-med-unidade" onchange="validarInput(this)">
+                    <option value="Contínuo" ${unidade === 'Contínuo' ? 'selected' : ''}>Contínuo</option>
                     <option value="Comprimidos" ${unidade === 'Comprimidos' ? 'selected' : ''}>Comprimidos</option>
-                    <option value="Tubo(s)" ${unidade === 'Tubo(s)' ? 'selected' : ''}>Tubo(s)</option>
                     <option value="Caixa(s)" ${unidade === 'Caixa(s)' ? 'selected' : ''}>Caixa(s)</option>
                     <option value="Ampola(s)" ${unidade === 'Ampola(s)' ? 'selected' : ''}>Ampola(s)</option>
                     <option value="Frasco(s)" ${unidade === 'Frasco(s)' ? 'selected' : ''}>Frasco(s)</option>
-                    <option value="Contínuo" ${unidade === 'Contínuo' ? 'selected' : ''}>Contínuo</option>
+                    <option value="Tubo(s)" ${unidade === 'Tubo(s)' ? 'selected' : ''}>Tubo(s)</option>
                 </select>
             </div>
         </div>
     `;
+}
+
+
+function validarInput(seletor){
+    let inputMedQtd = seletor.parentElement.querySelector('.input-med-qtd')
+    
+    let valor = seletor.value
+    
+    if(valor != 'Contínuo'){
+        inputMedQtd.disabled = false
+    }else{
+        inputMedQtd.value = ''
+        inputMedQtd.disabled = true
+    }
 }
 
 function adicionarLinhaMedicamento() {

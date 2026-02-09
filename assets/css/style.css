@@ -34,7 +34,7 @@
     --cor-borda: #e2e8f0;
     --cor-input-bg: #ffffff;
     --cor-card-med: #f8fafc;
-
+    --margem: 20px
 }
 
 *{
@@ -46,12 +46,23 @@
 
 body{
   background: var(--cor-de-fundo);
+  margin: 170px var(--margem) 20px;
 }
 
-.app{
-  padding: 20px;
-}
 
+
+nav.navegacao{
+  position: fixed;
+  backdrop-filter: blur(30px);
+  left: 0;
+  top: 0;
+  padding: 20px var(--margem);
+  z-index: 1000;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  background: transparent;
+  width: 100%;
+}
 
 nav.navegacao header.cabecalho{
   width: 100%;
@@ -130,6 +141,14 @@ nav.navegacao .pesquisar input[type="search"]:not(:placeholder-shown) ~ i.bx-x{
   visibility: visible;
 }
 
+.loading{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 50vh;
+  font-size: 1.2rem;
+}
 
 .receitas-grid {
   display: grid;
@@ -166,6 +185,7 @@ nav.navegacao .pesquisar input[type="search"]:not(:placeholder-shown) ~ i.bx-x{
   width: 45px;
   height: 45px;
   background: var(--cor-principal);
+  box-shadow: 0 0 20px #71ACFF95;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -390,7 +410,7 @@ select {
 }
 
 select{
-  
+  background: #fff;
 }
 
 input:focus, select:focus {
