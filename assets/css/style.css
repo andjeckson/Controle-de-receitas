@@ -43,6 +43,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'HarmonyOS', sans-serif;
+  user-select: none!important;
 }
 
 body{
@@ -79,6 +80,27 @@ nav.navegacao header.cabecalho{
   font-weight: bold;
   margin-bottom: 20px; 
 }
+
+
+
+nav.navegacao .botao-nova-receita{
+  width: 150px;
+  height: 40px;
+  border-radius: 1.2rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #fff;
+  background: var(--cor-principal);
+  box-shadow: 0 5px 20px var(--cor-da-sombra);
+  padding: 10px;
+  user-select: none;
+}
+
+nav.navegacao .botao-nova-receita:hover{
+  opacity: 0.9;
+}
+
 
 nav.navegacao .barra-de-pesquisa{
   transition: .1s linear;
@@ -135,7 +157,7 @@ nav.navegacao .pesquisar input[type="search"]::placeholder{
 }
 
 nav.navegacao .pesquisar input[type="search"]:hover{
-  border-color: #eee;
+  background: #f8f8f8;
 }
 
 nav.navegacao .pesquisar input[type="search"]:not(:placeholder-shown) ~ i.bx-x{
@@ -227,6 +249,17 @@ nav.navegacao .pesquisar input[type="search"]:not(:placeholder-shown) ~ i.bx-x{
   gap: 10px;
   flex-wrap: wrap; /* Evita quebra se o nome for gigante */
   margin-bottom: 5px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.item-medicamento:hover{
+  background: var(--cor-principal);
+  color: #fff!important;
+}
+
+.item-medicamento:hover *{
+  color: #fff!important;
 }
 
 .medicamento-nome {
@@ -262,14 +295,15 @@ nav.navegacao .pesquisar input[type="search"]:not(:placeholder-shown) ~ i.bx-x{
 }
 
 .data-info .bx-calendar {
-  font-size: 1.8rem;
+  font-size: 1.85rem;
   color: var(--cor-principal);
 }
 
 .data-texto {
   display: flex;
   flex-direction: column;
-  font-size: 0.75rem;
+  font-size: .85rem;
+  font-weight: bold;
 }
 
 /* Botões de Ação */
@@ -286,6 +320,7 @@ nav.navegacao .pesquisar input[type="search"]:not(:placeholder-shown) ~ i.bx-x{
   cursor: pointer;
   font-size: 1.3rem;
   transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-editar { color: var(--cor-principal); }
@@ -293,25 +328,6 @@ nav.navegacao .pesquisar input[type="search"]:not(:placeholder-shown) ~ i.bx-x{
 
 .btn-acao:hover {
   background: #f0f0f0;
-}
-
-button.botao-flutuante{
-  bottom: 10dvh;
-  right: 30px;
-  width: 150px;
-  height: 40px;
-  border-radius: 1.2rem;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  color: #fff;
-  background: var(--cor-principal);
-  box-shadow: 0 5px 20px var(--cor-da-sombra);
-  padding: 10px;
-}
-
-button.botao-flutuante:active{
-  opacity: 0.95;
 }
 
 /* ========== MODAL ===========*/
