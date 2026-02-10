@@ -95,6 +95,8 @@ nav.navegacao .botao-nova-receita{
   box-shadow: 0 5px 20px var(--cor-da-sombra);
   padding: 10px;
   user-select: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 nav.navegacao .botao-nova-receita:hover{
@@ -481,6 +483,8 @@ input:focus, select:focus {
     border-color: var(--cor-principal);
 }
 
+
+
 /* Card Individual de Medicamento */
 .med-card-edit {
     background: var(--cor-card-med);
@@ -490,8 +494,10 @@ input:focus, select:focus {
     margin-bottom: 12px;
 } 
 
+
+div#container-meds-novo,
 div#container-meds-edit{
-  max-height: 150px;
+  max-height: 200px;
   overflow-y: scroll;
   margin: 15px 0;
 }

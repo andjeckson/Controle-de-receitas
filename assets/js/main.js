@@ -1,4 +1,15 @@
 
+        
+let $scrollReveal = ScrollReveal({
+    duration: 1000,
+    opacity: 0,
+    distance: '20px',
+    direction: 'bottom',
+    scale: 0.9,
+    reset: false,
+})
+
+
 
 const WORKER_URL = "https://controledereceitas.andjeckson.workers.dev/"
 
@@ -132,6 +143,8 @@ function renderizarCards(lista) {
                 </footer>
             </article>`;
     }).join('');
+    
+    $scrollReveal.reveal('.receita-card')
 }
 
 /**
@@ -364,15 +377,4 @@ async function excluirRegistro(id) {
 document.addEventListener('DOMContentLoaded', carregarDados);
 
 
-
-        
-let $scrollReveal = ScrollReveal({
-    duration: 1000,
-    opacity: 0,
-    distance: '20px',
-    direction: 'bottom',
-    reset: true
-})
-
-$scrollReveal.reveal('.receitas-grid .receita-card')
 
