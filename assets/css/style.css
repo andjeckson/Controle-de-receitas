@@ -16,11 +16,12 @@
 
 :root{
   
-  --cor-principal: #1274E3;
+  --cor-principal: #3b2fbe;
   --cor-texto-secundaria: #666;
   --cor-perigo: #FF3030;
-  --cor-alerta: #FF870B;
+  --cor-alerta: #D8674E;
   --bg-item: #EDF3FF;
+  --cor-da-sombra: #A4ACFF95;
   --shadow-card: 0 10px 20px rgba(151, 159, 255, 0.25);
   --cor-de-fundo: #E5E5E5;
   --cor-de-texto-principal: #000;
@@ -185,7 +186,7 @@ nav.navegacao .pesquisar input[type="search"]:not(:placeholder-shown) ~ i.bx-x{
   width: 45px;
   height: 45px;
   background: var(--cor-principal);
-  box-shadow: 0 0 20px #71ACFF95;
+  box-shadow: 0 0 20px var(--cor-da-sombra);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -305,30 +306,22 @@ button.botao-flutuante{
   font-size: 1rem;
   color: #fff;
   background: var(--cor-principal);
-  box-shadow: 0 5px 20px #71ACFF95;
+  box-shadow: 0 5px 20px var(--cor-da-sombra);
   padding: 10px;
 }
 
 button.botao-flutuante:active{
   opacity: 0.95;
 }
-/*
 
+/* ========== MODAL ===========*/
 
-/* =========================================
-   VARIÁVEIS E RESET
-   ========================================= */
-   
-   
-/* =========================================
-   ESTRUTURA DO MODAL (ESTILO IMAGEM)
-   ========================================= */
 .modal {
     display: none;
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(4px); /* Efeito de fundo embaçado */
+    backdrop-filter: blur(4px);
     z-index: 9999;
     align-items: center;
     justify-content: center;
@@ -340,9 +333,9 @@ button.botao-flutuante:active{
 }
 
 .modal-content {
-    background: #ffffff;
+    background: #fff;
     width: 100%;
-    max-width: 450px;
+    max-width: 500px;
     border-radius: 1.5rem;
     padding: 24px;
     position: relative;
@@ -411,6 +404,7 @@ select {
 
 select{
   background: #fff;
+  width: max-content;
 }
 
 input:focus, select:focus {
@@ -462,10 +456,13 @@ input:focus, select:focus {
     display: flex;
     align-items: center;
     gap: 6px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .btn-add-med:hover {
-    background: #f8fafc;
+    background: var(--cor-principal);
+    color: #fff;
+    border-color: var(--cor-principal);
 }
 
 /* Card Individual de Medicamento */
@@ -476,6 +473,12 @@ input:focus, select:focus {
     padding: 16px;
     margin-bottom: 12px;
 } 
+
+div#container-meds-edit{
+  max-height: 150px;
+  overflow-y: scroll;
+  margin: 15px 0;
+}
 
 .med-card-row-1 {
     display: flex;
@@ -546,10 +549,15 @@ input:focus, select:focus {
   :root{
     --margem: 60px;
   }
+
 }
 
 @media screen and (min-width: 1024px){
   :root{
     --margem: 80px;
   }
+  
+.receitas-grid {
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+}
 } 

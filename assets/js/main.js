@@ -1,6 +1,8 @@
 
 
-const WORKER_URL = "https://controledereceitas.andjeckson.workers.dev/";
+const WORKER_URL = "https://controledereceitas.andjeckson.workers.dev/"
+
+
 const $ = document.querySelector.bind(document);
 
 // Atalho para eventos
@@ -21,13 +23,17 @@ barraDePesquisa.oninput = ()=> pesquisarPaciente()
 
 
 function pesquisarPaciente(){
-    let valor = barraDePesquisa.value
+    let valor = barraDePesquisa.value.toLowerCase()
     let cards = $('.receitas-grid').querySelectorAll('.receita-card')
     
         cards.forEach((card, i)=>{
-            let nomeDoPaciente = card.querySelector('.nome-paciente').textContent
+            let nomeDoPaciente = String(card.querySelector('.nome-paciente').textContent).toLowerCase()
+                
+                nomeDoPaciente = removerAcentos(nomeDoPaciente)
             
-            if( String(nomeDoPaciente).startsWith(valor)){
+            let valorPesquisado = removerAcentos(valor)
+            
+            if( nomeDoPaciente.startsWith(valorPesquisado) ){
                  card.style.display = ''
             }else{
                  card.style.display = 'none'
@@ -35,9 +41,23 @@ function pesquisarPaciente(){
         })
 }
 
+function removerAcentos(texto){
+    return texto
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g,'')
+}
+
 
 // Estado global da aplicação
 let receitasAtuais = [];
+
+
+
+function ordenarPacientes(lista) {
+    return lista.sort((a, b) => {
+        return a.paciente.localeCompare(b.paciente, 'pt-BR', { sensitivity: 'base' });
+    });
+}
 
 //Procura a lista de pacientes no Cloudflare Worker
 
@@ -51,8 +71,9 @@ async function carregarDados() {
         const response = await fetch(WORKER_URL);
         if (!response.ok) throw new Error("Erro ao conectar no servidor.");
         
-        // O Worker corrigido retorna [] se estiver vazio
-        receitasAtuais = await response.json();
+        let dadosBrutos = await response.json();
+        
+        receitasAtuais = ordenarPacientes(dadosBrutos)
         renderizarCards(receitasAtuais);
     } catch (error) {
         console.error(error);
@@ -60,11 +81,8 @@ async function carregarDados() {
     }
 }
 
-/**
+//Desenha os cards na tela
 
- * Desenha os cards na tela com suporte a Quantidade e Unidade
- */
- 
 function renderizarCards(lista) {
     const container = $('#container-receitas');
     if (!container || !lista) return;
@@ -124,7 +142,7 @@ function gerarTemplateLinha(nome = '', qtd = '', unidade = 'Comprimidos') {
     return `
         <div class="med-card-edit">
             <div class="med-card-row-1">
-                <input type="text" value="${nome}" class="input-med-nome" placeholder="Nome do medicamento">
+                <input type="text" value="${nome}" class="input-med-nome" placeholder="Nome do medicamento" list="lista-de-medicamentos">
                 <button type="button" class="btn-del-med" onclick="this.parentElement.parentElement.remove()">
                     <i class='bx bx-trash'></i>
                 </button>
@@ -357,3 +375,4 @@ let $scrollReveal = ScrollReveal({
 })
 
 $scrollReveal.reveal('.receitas-grid .receita-card')
+
